@@ -19,7 +19,9 @@ def new_face(nome):
     if new_face[0]:
         new_face_data = [nome, new_face[1]]
         faces.append(new_face_data)
-        print("Rosto do ", nome, "cadastrado com sucesso")
+
+        print("---------------------------------------------------\n\n")
+        print("Rosto do ", nome, "cadastrado com sucesso.\n\n")
     else:
         print("Rosto não cadastrado")
 
@@ -31,15 +33,17 @@ def identify_face():
             for datas in known_face[1]:
                 match = fr.compare_faces([datas], face_test[1][0])
                 if any(match):
-                    print(f"Rosto identificado como  {known_face[0]}")
+                    
+                    print("---------------------------------------------------\n\n")
+                    print(f"Rosto identificado como  {known_face[0]}.\n\n")
                     return
         print("Rosto não identificado.")
     else:
-        print("Não há rostos na imagem")
+        print("Não há rostos na imagem.")
 
 
 def take_picture():
-    cam = cv2.VideoCapture(0)
+    cam = cv2.VideoCapture(0, cv2.CAP_DSHOW)
     while True:
         picture, frame = cam.read()
         cv2.imshow("Camera", frame)
@@ -60,22 +64,25 @@ def edit_face():
     if not faces:
         print("Nenhum rosto cadastrado para editar.")
         return
-    name = input("Digite o nome da pessoa que  deseja editar: ")
+    name = input("Digite o nome da pessoa que  deseja editar:\n")
     for i, face_data in enumerate(faces):
         if face_data[0] == name:
-            new_name = input("Digite o novo nome ): ")
+            new_name = input("Digite o novo nome:\n ")
             if new_name:
                 face_data[0] = new_name
-            print("Informações editadas com sucesso.")
+            print("---------------------------------------------------\n\n")
+            print("Informações editadas com sucesso.\n\n")
             return
-    print("Rosto não encontrado. Certifique-se de que o nome está correto.")
+    print("Rosto não encontrado. Certifique-se de que o nome está correto.\n\n")
 
 
 def show_names():
     if not faces:
         print("Nenhum rosto cadastrado.")
     else:
-        print("Rostos cadastrados:")
+            
+        print("---------------------------------------------------\n\n")
+        print("Rostos cadastrados:\n")
         for face_data in faces:
             print(face_data[0])
 
